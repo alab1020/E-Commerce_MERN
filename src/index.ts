@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import userRoute from './routes/userRoute.ts';
+import { seedInitialProducts } from './services/productService.ts';
 
 const app = express();
 const port = 3001;
@@ -13,6 +14,8 @@ mongoose.connect('mongodb://localhost:27017/E-Commerce').then(() =>
     });
     
     app.use(express.json());
+
+    seedInitialProducts();
 
     app.use('/user', userRoute)
 
