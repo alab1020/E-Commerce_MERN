@@ -18,13 +18,6 @@ router.post('/login', async(req, res) => {
     res.status(statusCode).send(data);
 });
 
-router.get('/profile', async (req, res) => {
-  try {
-    const users = await userModel.find();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ message: "Server error" });
-  }
-});
+
     
 export default router;
