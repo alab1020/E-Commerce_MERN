@@ -1,5 +1,5 @@
 import express from "express";
-import { addItemToCart, getActiveCartForUser } from "../services/cartService.ts";
+import { addItemToCart, clearCart, deleteItemFromCart, getActiveCartForUser, updateItemInCart } from "../services/cartService.ts";
 import validateJWT, { type ExtendedRequest } from "../middlewares/validateJWT.ts";
 
 
@@ -25,6 +25,27 @@ router.get('/', validateJWT,
     
     })
 
+    router.put("/items", validateJWT, async(req: ExtendedRequest, res) => {
+        //TODO update item in cart
+        const userId = req?.user?._id;
+        const {productId, quantity} = req.body;
+        const response = await updateItemInCart({userId, productId, quantity})
+        res.status(response.statusCode).json(response.data);
+    })
 
+    router.delete("/items/:productId", validateJWT, async(req: ExtendedRequest, res) => {
+        //TODO delete item from cart
+        const userId = req?.user?._id;
+        const {productId} = req.params;
+
+        const response = await deleteItemFromCart({userId, productId})
+        res.status(response.statusCode).send(response.data);
+    })
+    router.delete("/", validateJWT, async(req: ExtendedRequest, res) => {
+        const userId = req?.user?._id;
+        const response = await clearCart({userId});
+        res.status(response.statusCode).send(response.data);
+
+    })
 
 export default router;
