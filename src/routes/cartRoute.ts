@@ -18,6 +18,8 @@ router.get('/', validateJWT,
 
         const userId = req?.user?._id;
         const {productId, quantity} = req.body;
+      
+        
         const response = await addItemToCart({userId, productId, quantity})
         
         res.status(response.statusCode).json(response.data);
@@ -30,7 +32,7 @@ router.get('/', validateJWT,
         const userId = req?.user?._id;
         const {productId, quantity} = req.body;
         const response = await updateItemInCart({userId, productId, quantity})
-        res.status(response.statusCode).json(response.data);
+        res.status(response.statusCode).send(response.data);
     })
 
     router.delete("/items/:productId", validateJWT, async(req: ExtendedRequest, res) => {
@@ -52,9 +54,8 @@ router.get('/', validateJWT,
         const userId = req?.user?._id;
         const{address} = req.body;
          const response = await checkoutCart({userId, address});
-        res.status(response.statusCode).send(response.data);
+        res.status(response.statusCode).json(response.data);
     })
-
 
 
 export default router;

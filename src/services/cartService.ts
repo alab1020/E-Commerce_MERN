@@ -178,9 +178,8 @@ export const checkoutCart = async ({ userId, address }: checkoutCart) => {
     const order = await orderModel.create({
         orderItems,
         total: cart.totalAmount,
-        address:
+        address,
         userId,
-        
     })  
     await order.save();
     // update the cart status to completed
