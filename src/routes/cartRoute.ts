@@ -1,5 +1,5 @@
 import express from "express";
-import { addItemToCart, clearCart, deleteItemFromCart, getActiveCartForUser, updateItemInCart } from "../services/cartService.ts";
+import { addItemToCart, checkoutCart, clearCart, deleteItemFromCart, getActiveCartForUser, updateItemInCart } from "../services/cartService.ts";
 import validateJWT, { type ExtendedRequest } from "../middlewares/validateJWT.ts";
 
 
@@ -47,5 +47,14 @@ router.get('/', validateJWT,
         res.status(response.statusCode).send(response.data);
 
     })
+    router.post("/checkout", validateJWT, async(req: ExtendedRequest, res) => {
+        //TODO checkout cart
+        const userId = req?.user?._id;
+        const{address} = req.body;
+         const response = await checkoutCart({userId, address});
+        res.status(response.statusCode).send(response.data);
+    })
+
+
 
 export default router;

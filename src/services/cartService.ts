@@ -1,9 +1,10 @@
 import { cartModel } from "../models/cartModel.ts";
+import { orderModel, type IOrderItem } from "../models/orderModel.ts";
 import productModel from "../models/productModel.ts";
 
 interface CreateCartForUser {
     userId: string;
-
+    
 }
 
 const createCartForUser = async ({ userId }: CreateCartForUser) => {
@@ -145,3 +146,45 @@ export const deleteItemFromCart = async ({ userId, productId }: deleteItemFromCa
 
     return { data: updatedCart, statusCode: 200 };
 }
+
+interface checkoutCart {
+    userId: string;
+    address:string;
+}
+
+export const checkoutCart = async ({ userId, address }: checkoutCart) => {
+    if(!address){
+        return {data: "Address is required", statusCode: 400}
+    }
+    const cart = await getActiveCartForUser({ userId });    
+    const orderItems: IOrderItem[] = [];
+    //Loop cartItems und create order items
+    for (const item of cart.items){
+        const product = await productModel.findById(item.product);
+        if(!product){
+            return {data: "Product not Found", statusCode: 404  }
+        }
+
+        const orderItem: IOrderItem = {
+            productTitle: product.title,
+            productImage: product.image,
+            unitPrice: item.unitPrice,
+            quantity: item.quantity
+        };
+        orderItems.push(orderItem);
+
+    }
+
+    const order = await orderModel.create({
+        orderItems,
+        total: cart.totalAmount,
+        address:
+        userId,
+        
+    })  
+    await order.save();
+    // update the cart status to completed
+    cart.status = "completed";
+    await cart.save();
+    return {data: order, statusCode: 200};
+};
