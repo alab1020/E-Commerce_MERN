@@ -22,7 +22,7 @@ const validateJWT = (req: ExtendedRequest, res: Response, next: NextFunction) =>
         res.status(401).send("Forbidden: No token provided");
         return;
     }
-    jwt.verify(token, "hazard-fatal-helmet", async(err, payload) => {
+    jwt.verify(token, process.env.JWT_SECRET || '', async(err, payload) => {
         if (err) {
             res.status(403).send("Forbidden: Invalid token");
             return;
