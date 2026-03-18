@@ -1,27 +1,41 @@
 import productModel from "../models/productModel.ts";
 
 export const getAllProducts = async () => {
-    return await productModel.find();
+  return await productModel.find();
 };
 
-
 export const seedInitialProducts = async () => {
-    try{
-    const Products = [
-        {title: "Laptop", image: "https://imgs.search.brave.com/fuO3Y2je8sCC6hRZ-Iac_FtX-aWVsfdMLB3MPCsb_Wo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9kZWxs/c3RhdGljLmx1cm9j/b25uZWN0LmNvbS9t/ZWRpYS9jYXRhbG9n/L3Byb2R1Y3QvY2Fj/aGUvM2UxM2NkNTQ0/MjRmM2M0OTdlODRm/Y2UzYTg1YjU1NzAv/bi9vL25vdGVib29r/LWRiMDYyNTB0LWJs/LWNvcGlsb3QtcGMt/c21hbGxfbmV3XzEu/cG5n", price: 15000, stock: 100},
-        {title: "Car", image: "https://via.placeholder.com/150", price: 19.99, stock: 50},
-        {title: "Phone", image: "https://via.placeholder.com/150", price: 5.99, stock: 200},
+  try {
+    const products = [
+      {
+        title: "Dell Laptop",
+        image:
+          "https://m.media-amazon.com/images/I/61+9ew81AfL._AC_UF1000,1000_QL80_.jpg",
+        price: 15000,
+        stock: 10,
+      },
+      {
+        title: "Asus Laptop",
+        image:
+          "https://dlcdnwebimgs.asus.com/gain/4cc342ab-c4fa-42a9-8619-a340f6119bec/w800",
+        price: 25000,
+        stock: 20,
+      },
+      {
+        title: "HP Laptop",
+        image:
+          "https://www.hp.com/gb-en/shop/Html/Merch/Images/c06723377_1750x1285.jpg",
+        price: 40000,
+        stock: 8,
+      },
     ];
 
-    const existingproducts = await getAllProducts();
+    const existingProducts = await getAllProducts();
 
-    if (existingproducts.length === 0) {
-        await productModel.insertMany(Products);
+    if (existingProducts.length === 0) {
+      await productModel.insertMany(products);
     }
-}
-catch(err){
-    console.error("Error seeding products:", err);
-
-}
-    
+  } catch (err) {
+    console.error("cannot see database", err);
+  }
 };
