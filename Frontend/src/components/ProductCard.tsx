@@ -25,7 +25,7 @@ export default function ProductCard({ title, image, price }: Props) {
           {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {price} EGP
+          {price} € 
         </Typography>
       </CardContent>
       <CardActions>

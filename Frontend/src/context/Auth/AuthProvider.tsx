@@ -14,21 +14,20 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   const isAuthenticated = !!token;
 
-  const login = (username: string, token: string) => {
+  
+ const login = (username: string, token: string) => {
     setUsername(username);
     setToken(token);
     localStorage.setItem(USERNAME_KEY, username);
     localStorage.setItem(TOKEN_KEY, token);
   };
-
-  const logout = () => {
+   const logout = () => {
     localStorage.removeItem(USERNAME_KEY);
     localStorage.removeItem(TOKEN_KEY);
     setUsername(null);
     setToken(null);
   };
-
-  return (
+   return (
     <AuthContext.Provider
       value={{ username, token, isAuthenticated, login, logout }}
     >
