@@ -1,5 +1,5 @@
 import express from "express";
-import { addItemToCart, checkoutCart, clearCart, deleteItemFromCart, getActiveCartForUser, updateItemInCart } from "../services/cartService.ts";
+import { addItemToCart, checkout, clearCart, deleteItemIncart, getActiveCartForUser, updateItemInCart } from "../services/cartService.ts";
 import validateJWT, { type ExtendedRequest } from "../middlewares/validateJWT.ts";
 
 
@@ -10,7 +10,7 @@ router.get('/', validateJWT,
         const userId = req?.user?._id;
     //TODO get userId from the jwt, after 
 
-    const cart = await getActiveCartForUser({ userId });
+     const cart = await getActiveCartForUser({ userId, populateProduct: true });
     res.status(200).json(cart);
      });
 
@@ -40,7 +40,7 @@ router.get('/', validateJWT,
         const userId = req?.user?._id;
         const {productId} = req.params;
 
-        const response = await deleteItemFromCart({userId, productId})
+        const response = await deleteItemIncart({userId, productId})
         res.status(response.statusCode).send(response.data);
     })
     router.delete("/", validateJWT, async(req: ExtendedRequest, res) => {
@@ -53,7 +53,7 @@ router.get('/', validateJWT,
         //TODO checkout cart
         const userId = req?.user?._id;
         const{address} = req.body;
-         const response = await checkoutCart({userId, address});
+         const response = await checkout({userId, address});
         res.status(response.statusCode).json(response.data);
     })
 
