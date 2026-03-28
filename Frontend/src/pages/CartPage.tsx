@@ -6,7 +6,19 @@ import Container from "@mui/material/Container";
 import { useCart } from "../context/Cart/CartContext";
 
 const CartPage = () => {
-  const { cartItems, totalAmount } = useCart();
+  const { cartItems, totalAmount, updateItemInCart, removeItemInCart } = useCart();
+
+  const handleQuantity = (productId: string, quantity: number) => {
+    if (quantity <= 0) {
+      return;
+    }
+
+    updateItemInCart(productId, quantity);
+  };
+
+  const handleRemoveItem = (productId: string) => {
+    removeItemInCart(productId);
+  };
 
   return (
     <Container fixed sx={{ mt: 2 }}>
@@ -32,17 +44,33 @@ const CartPage = () => {
                 <Typography>
                   {item.quantity} x {item.unitPrice} EGP
                 </Typography>
-                <Button>Remove Item</Button>
+                <Button onClick={() => handleRemoveItem(item.productId)}>
+                  Remove Item
+                </Button>
               </Box>
             </Box>
             <ButtonGroup variant="contained" aria-label="Basic button group">
-              <Button>-</Button>
-              <Button>+</Button>
+              <Button
+                onClick={() =>
+                  handleQuantity(item.productId, item.quantity - 1)
+                }
+              >
+                -
+              </Button>
+              <Button
+                onClick={() =>
+                  handleQuantity(item.productId, item.quantity + 1)
+                }
+              >
+                +
+              </Button>
             </ButtonGroup>
           </Box>
         ))}
         <Box>
-          <Typography variant="h4">Total Amount: {totalAmount.toFixed(2)} EGP</Typography>
+          <Typography variant="h4">
+            Total Amount: {totalAmount.toFixed(2)} EGP
+          </Typography>
         </Box>
       </Box>
     </Container>
