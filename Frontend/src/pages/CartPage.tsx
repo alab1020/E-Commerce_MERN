@@ -84,7 +84,9 @@ const CartPage = () => {
         sx={{ mb: 2 }}
       >
         <Typography variant="h4">My Cart</Typography>
-        <Button onClick={() => clearCart()}>Clear Cart</Button>
+        <Button onClick={() => clearCart()} sx={{ backgroundColor: " #ffad46" }}>
+          Clear Cart
+        </Button>
       </Box>
       {cartItems.length ? (
         renderCartItems()
