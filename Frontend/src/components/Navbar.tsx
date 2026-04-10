@@ -85,7 +85,7 @@ function Navbar() {
                     fontWeight: 700,
                   }}
                 >
-                  Tech Hub
+                  Hakim International Commerce 
                 </Typography>
               </Box>
             </Button>
