@@ -16,7 +16,7 @@ const validateJWT = (req: ExtendedRequest, res: Response, next: NextFunction) =>
         res.status(403).send("authorizationheader ist not provided");
         return;
     }
-    const token = authorizationHeader.split(' ')[1]; // Assuming
+    const token = authorizationHeader.split(' ')[1]; // Assuming index of the token is 1, as the format is "Bearer <token>"
 
     if(!token) {
         res.status(401).send("Forbidden: No token provided");
