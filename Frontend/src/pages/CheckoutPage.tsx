@@ -48,7 +48,7 @@ const CheckoutPage = () => {
             >
               <Typography variant="h6">{item.title}</Typography>
               <Typography>
-                {item.quantity} x {item.unitPrice} EGP
+                {item.quantity} x {item.unitPrice} €
               </Typography>
             </Box>
           </Box>
@@ -56,7 +56,7 @@ const CheckoutPage = () => {
       ))}
       <Box>
         <Typography variant="body2" sx={{ textAlign: "right" }}>
-          Total Amount: {totalAmount.toFixed(2)} EGP
+          Total Amount: {totalAmount.toFixed(2)} €
         </Typography>
       </Box>
     </Box>
