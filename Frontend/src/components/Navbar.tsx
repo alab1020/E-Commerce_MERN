@@ -150,7 +150,7 @@ function Navbar() {
               ) : (
                 <Button
                   variant="contained"
-                  color="success"
+                  color="secondary"
                   onClick={handleLogin}
                 >
                   Login
