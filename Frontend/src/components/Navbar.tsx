@@ -38,6 +38,10 @@ function Navbar() {
     navigate("/login");
   };
 
+  const handleRegister = () => {
+    navigate("/register");
+  };
+
   const handleLogout = () => {
     logout();
     navigate("/");
@@ -148,13 +152,27 @@ function Navbar() {
                   </Menu>
                 </>
               ) : (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleLogin}
-                >
-                  Login
-                </Button>
+                <Box display="flex" flexDirection="row" gap={1}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleLogin}
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={handleRegister}
+                    sx={{
+                      bgcolor: "#EADBC8",
+                      color: "primary.dark",
+                      fontWeight: 600,
+                      "&:hover": { bgcolor: "#DCC9AE" },
+                    }}
+                  >
+                    Register
+                  </Button>
+                </Box>
               )}
             </Box>
           </Box>
