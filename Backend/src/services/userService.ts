@@ -48,8 +48,18 @@ export const login = async ({ email, password }: LoginParams) => {
     }
 }
 
+const getJwtSecret = (): string => {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+        throw new Error("JWT_SECRET is not defined in environment variables");
+    }
+    return secret;
+}
 
 const generateJWT = (data: any) => {
-    return jwt.sign(data, process.env.JWT_SECRET || "")
+    return jwt.sign(data, getJwtSecret(), {
+        expiresIn: "1h",
+        algorithm: "HS256",
+    });
 }
 
