@@ -451,17 +451,7 @@ Aktuell werden Produkte beim Backend-Start automatisch eingefügt (Seeding). Fü
 3. Stelle die Environment-Variablen ein
 4. Das Frontend wird automatisch bereitgestellt
 
-## 📄 Lizenz
 
-Dieses Projekt ist unter der **ISC License** lizenziert. Siehe die [LICENSE](LICENSE) Datei für Details.
-
-## 👨‍💻 Autor
-
-Erstellt von [Dein Name]
-
-## 🤝 Beitragen
-
-Beiträge sind willkommen! Bitte erstelle einen Pull Request oder öffne ein Issue.
 
 ---
 
